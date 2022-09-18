@@ -24,8 +24,5 @@ urlpatterns = [
     url(r'register/', views.RegisterUser.as_view(), name='user_register'),
     url(r'login/', auth_views.LoginView.as_view(template_name='blindstick/login.html'), name='login'),
     url(r'logout/', auth_views.LogoutView.as_view(template_name='blindstick/index.html'), name='logout'),
-    url(r'location/', views.EmergencyEventListView.as_view(), name='location_list'),
-    url(r'emergencyevent/', views.GetEmergencyEventData.as_view(), name='get_emergency_event')
-
-
+    url(r'emergencyevent/', views.EmergencyEventListView.as_view(), name='emergency_event'),
 ]

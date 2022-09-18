@@ -1,7 +1,7 @@
 {% extends "blindstick/header.html" %}
 {% block content %}
 {% load crispy_forms_tags %}
-    <table id="_appendHere" class="table table-bordered">
+    <table class="table table-bordered">
         <thead>
         <tr>
             <th>User</th>
@@ -25,15 +25,10 @@
     </table>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-<!--    var myVar = setInterval(churchupdate, 1000);-->
-<!--    function churchupdate() {-->
-<!--  $.ajax({-->
-<!--    url: '/location/',-->
-<!--    type: 'get',-->
-<!--    success: function(data) {-->
-<!--  $('/location/').contents().last()[0].textContent=data;-->
-<!--    },-->
-<!--    });-->
-<!--}-->
+function myrefresh() {
+    window.location.reload();
+
+}
+setTimeout('myrefresh()', 5000); //five second reload
 </script>
 {% endblock %}
