@@ -20,11 +20,12 @@ from django.urls import re_path as url
 from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'index/', views.indexView.as_view(), name='index'),
+    url(r'$', views.indexView.as_view(), name='index'),
     url(r'register/', views.RegisterUser.as_view(), name='user_register'),
-    # url(r'login/', views.UserLogin.as_view(), name='user_login'),
     url(r'login/', auth_views.LoginView.as_view(template_name='blindstick/login.html'), name='login'),
-    url(r'logout/', auth_views.LogoutView.as_view(template_name='blindstick/index.html'), name='logout')
+    url(r'logout/', auth_views.LogoutView.as_view(template_name='blindstick/index.html'), name='logout'),
+    url(r'location/', views.EmergencyEventListView.as_view(), name='location_list'),
+    url(r'emergencyevent/', views.GetEmergencyEventData.as_view(), name='get_emergency_event')
 
 
 ]

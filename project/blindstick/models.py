@@ -4,18 +4,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# 创建所有的模型的基类
-class BaseModel(models.Model):
-
-    create_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
-    update_time = models.DateTimeField(auto_now_add=True, verbose_name='更新时间')
-    is_delete = models.BooleanField(default=False, verbose_name='是否删除')
-
-    class Meta:
-
-        abstract = True
-
-
 class UserProfile(models.Model):
 
     USER_GENDER_TYPE = (
@@ -34,3 +22,10 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user
+
+class EmergencyEvent(models.Model):
+    user = models.CharField('username', max_length=100, blank=False, null=False)
+    device = models.IntegerField('device', blank=False, null=False)
+    location = models.CharField('location', max_length=100, blank=True, default='')
+    time = models.DateTimeField('occur_time', blank=False, null=False)
+    is_processed = models.BooleanField('is_processed', blank=False, null=False, default=False)

@@ -1,0 +1,39 @@
+{% extends "blindstick/header.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+    <table id="_appendHere" class="table table-bordered">
+        <thead>
+        <tr>
+            <th>User</th>
+            <th>Device</th>
+            <th>Location</th>
+            <th>Time</th>
+            <th>Is_Processed</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for obj in queryset %}
+            <tr>
+                <td>{{ obj.user }}</td>
+                <td>{{ obj.device }}</td>
+                <td>{{ obj.location }}</td>
+                <td>{{ obj.time }}</td>
+                <td>{{ obj.is_processed }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+<!--    var myVar = setInterval(churchupdate, 1000);-->
+<!--    function churchupdate() {-->
+<!--  $.ajax({-->
+<!--    url: '/location/',-->
+<!--    type: 'get',-->
+<!--    success: function(data) {-->
+<!--  $('/location/').contents().last()[0].textContent=data;-->
+<!--    },-->
+<!--    });-->
+<!--}-->
+</script>
+{% endblock %}
