@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+for i in exec/*py; do
+	python ${i} &
+done	
+#python exec/sensor-distance.py &
+#python exec/sensor-level.py 
