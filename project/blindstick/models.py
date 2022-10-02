@@ -25,7 +25,7 @@ class UserProfile(models.Model):
 
 class EmergencyEvent(models.Model):
     user = models.CharField('username', max_length=100, blank=False, null=False)
-    device = models.IntegerField('device', blank=False, null=False)
+    device = models.CharField('device',  max_length=100, blank=False, null=False)
     location = models.CharField('location', max_length=100, blank=True, default='')
     time = models.DateTimeField('occur_time', blank=False, null=False)
     is_processed = models.BooleanField('is_processed', blank=False, null=False, default=False)

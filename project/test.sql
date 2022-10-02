@@ -241,7 +241,7 @@ ALTER SEQUENCE public.auth_user_user_permissions_id_seq OWNED BY public.auth_use
 
 CREATE TABLE public.blindstick_emergencyevent (
     id bigint NOT NULL,
-    device integer NOT NULL,
+    device character varying(100) NOT NULL,
     location character varying(100) NOT NULL,
     "time" timestamp with time zone NOT NULL,
     is_processed boolean NOT NULL,
@@ -604,21 +604,6 @@ COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
 COPY public.blindstick_emergencyevent (id, device, location, "time", is_processed, "user") FROM stdin;
 1	1	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user1
 2	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user2
-3	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user3
-4	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user3
-5	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user4
-6	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user5
-7	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user6
-8	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user7
-9	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user7
-10	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user8
-11	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user9
-12	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user9
-13	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user10
-14	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user11
-15	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user12
-16	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user13
-17	2	-32.037806, 115.801364	2022-09-18 00:00:00+08	f	user14
 \.
 
 

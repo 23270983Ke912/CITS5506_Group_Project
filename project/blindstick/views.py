@@ -18,7 +18,6 @@ class indexView(TemplateView):
 
 
 
-
 class RegisterUser(CreateView):
     form_class = RegisterForm
     success_url = reverse_lazy('login')
