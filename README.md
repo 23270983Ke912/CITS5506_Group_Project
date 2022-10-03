@@ -19,7 +19,7 @@ exit\
 
 # Run server
 Database migration \
-`python3 manage.py makemigrations app` \
+`python3 manage.py makemigrations blindstick` \
 `python3 manage.py migrate`\
 Load test data\
 `python3 manage.py loaddata blindstick_data.json`
