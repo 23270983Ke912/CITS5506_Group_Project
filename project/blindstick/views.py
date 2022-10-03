@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 # Create your views here.
 from django.contrib.auth.views import TemplateView
 from django.views.generic import CreateView, ListView, View
@@ -27,6 +27,16 @@ post data type:
 }
 """
 class UserView(View):
+    def get(self, request):
+        username = request.GET.get('username')
+        queryset = UserProfile.objects.filter(username=username).first()
+        if queryset:
+            response = {}
+            response['firstname'] = queryset.firstname
+            response['lastname'] = queryset.lastname
+            response['email'] = queryset.email
+            return JsonResponse(response)
+        return JsonResponse({"error":"Cannot find this user in database"})
     def post(self, request, *args, **kwargs):
         import json
         json_data = json.loads(request.body)
