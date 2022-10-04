@@ -6,10 +6,10 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
 
-    username = models.CharField('user', max_length=64, blank=False, default='')
+    username = models.CharField('user', max_length=64, blank=False, default='', unique=True)
     firstname = models.CharField('firstname', max_length=64, blank=False, default='')
     lastname = models.CharField('lastname', max_length=64, blank=False, default='')
-    email = models.EmailField('email', blank=False, default='')
+    email = models.EmailField('email', blank=False, default='', unique=True)
     password = models.CharField('password', max_length=64, blank=False, default='' )
 
     def __str__(self):

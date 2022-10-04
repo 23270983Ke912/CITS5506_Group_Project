@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.utils.decorators import method_decorator  #类装饰方法
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
 
 
 class indexView(TemplateView):
@@ -29,14 +30,16 @@ post data type:
 class UserView(View):
     def get(self, request):
         username = request.GET.get('username')
+        password = request.GET.get('password')
         queryset = UserProfile.objects.filter(username=username).first()
-        if queryset:
-            response = {}
-            response['firstname'] = queryset.firstname
-            response['lastname'] = queryset.lastname
-            response['email'] = queryset.email
-            return JsonResponse(response)
-        return JsonResponse({"error":"Cannot find this user in database"})
+        if not username or password:
+            return JsonResponse({"error": "Please provide username and password"})
+        if not queryset:
+            return JsonResponse({"error": "Cannot find this user in database"})
+        if password == queryset.password:
+            return render(request, 'blindstick/index.html')
+        return JsonResponse({"error": "The username and password cannot match"})
+
     def post(self, request, *args, **kwargs):
         import json
         json_data = json.loads(request.body)
@@ -46,8 +49,11 @@ class UserView(View):
         email = json_data.get('email')
         password = json_data.get('password')
         userprofile = UserProfile(**json_data)
-        userprofile.save()
-        return HttpResponse("Success")
+        try:
+            userprofile.save()
+            return HttpResponse("Success")
+        except ValidationError as e:
+            raise e
 
 
 
