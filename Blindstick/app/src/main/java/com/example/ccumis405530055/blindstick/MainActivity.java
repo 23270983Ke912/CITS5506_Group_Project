@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -50,11 +51,20 @@ public class MainActivity extends AppCompatActivity {
     TextView tv_lng,tv_lat,tv_city,tv_user;
     private String android_id,username;
     RequestQueue queue;
+    String Location;
+    private BluetoothAdapter mBluetoothAdapter;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (!mBluetoothAdapter.isEnabled()) {
+            Intent enableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBluetooth, 0);
+        }
+
         tv_user=findViewById(R.id.tv_username);
          tv_lng = findViewById(R.id.tv_long);
          tv_lat = findViewById(R.id.tv_lat);
@@ -86,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void getcookie(){
 
-        String url = ServerInfo.serverurl+"/auth/login";
+        String url = ServerInfo.serverurl+"/login";
         StringRequest req = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -152,13 +162,24 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void help(View view) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = formatter.format(new Date());
+        postrequest(username,android_id,Location,time);
+    }
+
+    public void pair(View view) {
+        Intent intent = new Intent(MainActivity.this, BluetoothPairActivity.class);
+        startActivity(intent);
+    }
+
     private class mLocationListenerGPS implements LocationListener {
         @Override
         public void onLocationChanged(Location loc) {
-
-            tv_lng.setText("Longitude  = "+loc.getLongitude());
-            tv_lat.setText("Latitude = "+loc.getLatitude());
-
+            float g_long= (float) loc.getLongitude();
+            float g_lat= (float) loc.getLatitude();
+            tv_lng.setText("Longitude  = "+String.format("%.5f", g_long));
+            tv_lat.setText("Latitude = "+String.format("%.5f", g_lat));
 
             /*------- To get city name from coordinates -------- */
             String cityName = null;
@@ -176,12 +197,10 @@ public class MainActivity extends AppCompatActivity {
             }
             Log.i("Location", "GPS Location changed: Lat: " + loc.getLatitude() + " Lng: "
                     + loc.getLongitude());
-            String Location = loc.getLatitude()+","+loc.getLongitude();
+            Location = loc.getLatitude()+","+loc.getLongitude();
             tv_city.setText("City = "+cityName);
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-            String time = formatter.format(new Date());
-            postrequest(username,android_id,Location,time);
+            //postrequest(username,android_id,Location,time);
         }
 
         @Override
@@ -209,9 +228,10 @@ public class MainActivity extends AppCompatActivity {
     private class mLocationListenerNetwork implements LocationListener {
         @Override
         public void onLocationChanged(Location loc) {
-
-            tv_lng.setText("Longitude  = "+loc.getLongitude());
-            tv_lat.setText("Latitude = "+loc.getLatitude());
+            float g_long= (float) loc.getLongitude();
+            float g_lat= (float) loc.getLatitude();
+            tv_lng.setText("Longitude  = "+String.format("%.5f", g_long));
+            tv_lat.setText("Latitude = "+String.format("%.5f", g_lat));
             /*------- To get city name from coordinates -------- */
             String cityName = null;
             Geocoder gcd = new Geocoder(getBaseContext(), Locale.getDefault());
@@ -226,6 +246,7 @@ public class MainActivity extends AppCompatActivity {
             catch (IOException e) {
                 e.printStackTrace();
             }
+            Location = loc.getLatitude()+","+loc.getLongitude();
             Log.i("Location", "Network Location changed: Lat: " + loc.getLatitude() + " Lng: "
                             + loc.getLongitude());
             tv_city.setText("City = "+cityName);
@@ -263,6 +284,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.i("success",response);
+                        Toast.makeText(MainActivity.this,"Emergency Message Sent!",Toast.LENGTH_LONG).show();
+
                     }
                 },
                 new Response.ErrorListener() {

@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -43,6 +44,7 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
     EditText et_username,et_password;
     ArrayList<String> permissionsList;
+    TextView tv_servererror;
     RequestQueue queue;
     String[] permissionsStr = {
             Manifest.permission.INTERNET,
@@ -80,11 +82,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        tv_servererror=findViewById(R.id.tv_servererror);
         et_username=findViewById(R.id.et_username);
         et_password=findViewById(R.id.et_password);
-        et_username.setText("admin");
-
-        et_password.setText("admin");
+        et_username.setText("Ke912");
+        et_password.setText("A10723002");
         queue = Volley.newRequestQueue(this);
         getcookie();
     }
@@ -126,6 +128,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void signup(View view) {
+        if(LoginSession.getInstance().getCookie()==null){
+            Toast.makeText(LoginActivity.this, "Server is not connected!", Toast.LENGTH_SHORT).show();
+            tv_servererror.setVisibility(View.VISIBLE);
+            return;
+        }
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
     }
@@ -142,7 +149,8 @@ public void getcookie(){
             new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.i("error",error.getMessage());
+                    tv_servererror.setVisibility(View.VISIBLE);
+                    Toast.makeText(LoginActivity.this, "Server is not connected!", Toast.LENGTH_SHORT).show();
                 }
             }){
 
@@ -161,8 +169,17 @@ public void getcookie(){
 }
 
     private void loginRequest() {
-        String url = ServerInfo.serverurl+"/auth/login/";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+        if(LoginSession.getInstance().getCookie()==null){
+            tv_servererror.setVisibility(View.VISIBLE);
+            Toast.makeText(LoginActivity.this, "Server is not connected!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String uri = String
+                .format(ServerInfo.serverurl+"/userinfo/?username=%1$s&password=%2$s",
+                        et_username.getText().toString(),
+                        et_password.getText().toString());
+        //String url = ServerInfo.serverurl+"/userinfo/";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, uri,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -199,13 +216,13 @@ public void getcookie(){
                 return params;
             }
 
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("username",et_username.getText().toString());
-                params.put("password",et_password.getText().toString());
-                return params;
-            }
+//            @Override
+//            protected Map<String,String> getParams(){
+//                Map<String,String> params = new HashMap<String, String>();
+//                params.put("username",et_username.getText().toString());
+//                params.put("password",et_password.getText().toString());
+//                return params;
+//            }
         };
         queue.add(stringRequest);
     }
@@ -223,14 +240,13 @@ public void getcookie(){
         // fire an intent to display a dialog asking the user to grant permission to enable it.
         SharedPreferences sh = getSharedPreferences("LoginFile", Context.MODE_PRIVATE);
 
-// The value will be default as empty string because for
-// the very first time when the app is opened, there is nothing to show
         String Status = sh.getString("Status", "");
         String UserName = sh.getString("Username", "");
         LoginSession.getInstance().setUsername(UserName);
         permissionsList = new ArrayList<>();
         permissionsList.addAll(Arrays.asList(permissionsStr));
         askForPermissions(permissionsList);
+        getcookie();
         if(Status.equals("Login")){
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
