@@ -32,7 +32,7 @@ class UserView(View):
         username = request.GET.get('username')
         password = request.GET.get('password')
         queryset = UserProfile.objects.filter(username=username).first()
-        if not username or password:
+        if not username or not password:
             return JsonResponse({"error": "Please provide username and password"})
         if not queryset:
             return JsonResponse({"error": "Cannot find this user in database"})
