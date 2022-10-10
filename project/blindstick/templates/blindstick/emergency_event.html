@@ -19,6 +19,10 @@
                 <td>{{ obj.location }}</td>
                 <td>{{ obj.time }}</td>
                 <td>{{ obj.is_processed }}</td>
+                <td><form action="edit/?username={{ obj.user }}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="process">
+                </form></td>
             </tr>
         {% endfor %}
         </tbody>

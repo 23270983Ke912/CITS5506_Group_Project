@@ -92,3 +92,14 @@ class EmergencyEventListView(ListView):
         emergency_event.save()
         queryset = EmergencyEvent.objects.all()
         return render(request, self.template_name, context={'queryset': queryset})
+
+class EmergencyEventEditView(ListView):
+    model = EmergencyEvent
+
+    @method_decorator(login_required)
+    @csrf_exempt
+    def post(self, request, *args, **kwargs):
+        user = request.GET.get("username")
+        if user:
+            self.model.objects.filter(user=user).update(is_processed=True)
+        return redirect('/emergencyevent/')
