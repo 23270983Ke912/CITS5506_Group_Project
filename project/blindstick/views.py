@@ -78,7 +78,7 @@ class EmergencyEventListView(ListView):
 
     @method_decorator(login_required)
     def get(self, request):
-        queryset = self.model.objects.all()
+        queryset = self.model.objects.order_by('time')
         return render(request, self.template_name, context={'queryset': queryset})
     @csrf_exempt
     def post(self, request, *args, **kwargs):
@@ -99,7 +99,7 @@ class EmergencyEventEditView(ListView):
     @method_decorator(login_required)
     @csrf_exempt
     def post(self, request, *args, **kwargs):
-        user = request.GET.get("username")
-        if user:
-            self.model.objects.filter(user=user).update(is_processed=True)
+        id = request.GET.get("id")
+        if id:
+            self.model.objects.filter(id=id).update(is_processed=True)
         return redirect('/emergencyevent/')

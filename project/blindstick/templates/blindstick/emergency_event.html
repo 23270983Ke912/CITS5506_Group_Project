@@ -19,7 +19,7 @@
                 <td>{{ obj.location }}</td>
                 <td>{{ obj.time }}</td>
                 <td>{{ obj.is_processed }}</td>
-                <td><form action="edit/?username={{ obj.user }}" method="POST">
+                <td><form action="edit/?id={{ obj.id }}" method="POST">
                     {% csrf_token %}
                     <input type="submit" value="process">
                 </form></td>
