@@ -48,12 +48,12 @@ public class LoginActivity extends AppCompatActivity {
     RequestQueue queue;
     String[] permissionsStr = {
             Manifest.permission.INTERNET,
+            Manifest.permission.BLUETOOTH_CONNECT,
             Manifest.permission.ACCESS_FINE_LOCATION};
     int permissionsCount = 0;
     ActivityResultLauncher<String[]> permissionsLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
                     new ActivityResultCallback<Map<String, Boolean>>() {
-                        @RequiresApi(api = Build.VERSION_CODES.M)
                         @Override
                         public void onActivityResult(Map<String, Boolean> result) {
                             ArrayList<Boolean> list = new ArrayList<>(result.values());
@@ -117,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                 .setMessage("Some permissions are need to be allowed to use this app without any problems.")
                 .setPositiveButton("Settings", (dialog, which) -> {
                     dialog.dismiss();
+                    return;
                 });
         if (alertDialog == null) {
             alertDialog = builder.create();
@@ -138,7 +139,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 public void getcookie(){
 
-    String url = ServerInfo.serverurl+"/auth/login";
+    String url = ServerInfo.serverurl+"/login";
     StringRequest req = new StringRequest(Request.Method.GET, url,
             new Response.Listener<String>() {
                 @Override
@@ -243,9 +244,7 @@ public void getcookie(){
         String Status = sh.getString("Status", "");
         String UserName = sh.getString("Username", "");
         LoginSession.getInstance().setUsername(UserName);
-        permissionsList = new ArrayList<>();
-        permissionsList.addAll(Arrays.asList(permissionsStr));
-        askForPermissions(permissionsList);
+
         getcookie();
         if(Status.equals("Login")){
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);

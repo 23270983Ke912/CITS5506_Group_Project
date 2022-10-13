@@ -111,12 +111,14 @@ public class BluetoothPairActivity extends Activity implements AdapterView.OnIte
 
             if (action.equals(BluetoothDevice.ACTION_FOUND)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                mBTDevices.add(device);
-                Log.d(TAG, "onReceive: " + device.getName() + ": " + device.getAddress());
-                mDeviceListAdapter = new DeviceListAdapter(context, R.layout.device_adapter_view, mBTDevices);
-                lvNewDevices.setAdapter(mDeviceListAdapter);
+                if(device.getName()!=null) {
+                    mBTDevices.add(device);
+                    Log.d(TAG, "onReceive: " + device.getName() + ": " + device.getAddress());
+                    mDeviceListAdapter = new DeviceListAdapter(context, R.layout.device_adapter_view, mBTDevices);
+                    lvNewDevices.setAdapter(mDeviceListAdapter);
+                }
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                Toast.makeText(BluetoothPairActivity.this, "搜尋完畢", Toast.LENGTH_LONG).show();
+                Toast.makeText(BluetoothPairActivity.this, "scan finish", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -187,12 +189,11 @@ public class BluetoothPairActivity extends Activity implements AdapterView.OnIte
 
     @SuppressLint("MissingPermission")
     public void btnDiscover(View view) {
-
         mBTDevices = new ArrayList<>();
         Log.d(TAG, "btnDiscover: Looking for unpaired devices.");
 
         if(mBluetoothAdapter.isDiscovering()){
-
+            Toast.makeText(BluetoothPairActivity.this,"Restart scanning",Toast.LENGTH_LONG).show();
             mBluetoothAdapter.cancelDiscovery();
             Log.d(TAG, "btnDiscover: Canceling discovery.");
 
@@ -202,9 +203,8 @@ public class BluetoothPairActivity extends Activity implements AdapterView.OnIte
             mBluetoothAdapter.startDiscovery();
             IntentFilter discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
             registerReceiver(mBroadcastReceiver3, discoverDevicesIntent);
-        }
-        if(!mBluetoothAdapter.isDiscovering()){
-
+        }else{
+            Toast.makeText(BluetoothPairActivity.this,"Start scanning",Toast.LENGTH_LONG).show();
             //check BT permissions in manifest
             checkBTPermissions();
 
@@ -255,7 +255,6 @@ public class BluetoothPairActivity extends Activity implements AdapterView.OnIte
         }
     }
     public void backindex(View v ){
-        Toast.makeText(this, "Return", Toast.LENGTH_LONG).show();
         Intent intent = new Intent();
         intent.setClass(this, MainActivity.class);
         startActivity(intent);
