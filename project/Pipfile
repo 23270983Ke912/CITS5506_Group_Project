@@ -8,8 +8,7 @@ django = "*"
 django-crispy-forms = "*"
 psycopg2-binary = "*"
 django-cors-headers = "*"
-postgresql = "*"
-postgresql-contrib = "*"
+
 [dev-packages]
 
 [requires]
