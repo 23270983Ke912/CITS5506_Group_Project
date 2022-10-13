@@ -37,13 +37,13 @@
 
     <EditText
         android:id="@+id/et_repwd"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="40dp"
+        android:background="@drawable/edittextshape"
         android:ems="10"
+        android:gravity="center_horizontal|center_vertical"
         android:inputType="textPassword"
         android:text="A10723002"
-        android:background="@drawable/edittextshape"
-        android:gravity="center_horizontal|center_vertical"
 
         app:layout_constraintBottom_toBottomOf="@+id/textView9"
         app:layout_constraintStart_toStartOf="@+id/et_pwd"
@@ -64,13 +64,13 @@
 
     <EditText
         android:id="@+id/et_lname"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="40dp"
+        android:background="@drawable/edittextshape"
         android:ems="10"
+        android:gravity="center_horizontal|center_vertical"
         android:inputType="textPersonName"
         android:text="Lu"
-        android:background="@drawable/edittextshape"
-        android:gravity="center_horizontal|center_vertical"
 
         app:layout_constraintBottom_toBottomOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="@+id/et_fname"
@@ -78,13 +78,13 @@
 
     <EditText
         android:id="@+id/et_pwd"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="40dp"
+        android:background="@drawable/edittextshape"
         android:ems="10"
+        android:gravity="center_horizontal|center_vertical"
         android:inputType="textPassword"
         android:text="A10723002"
-        android:background="@drawable/edittextshape"
-        android:gravity="center_horizontal|center_vertical"
 
         app:layout_constraintBottom_toBottomOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="@+id/et_email"
@@ -106,26 +106,27 @@
 
     <EditText
         android:id="@+id/et_email"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="40dp"
+        android:background="@drawable/edittextshape"
         android:ems="10"
+        android:gravity="center_horizontal|center_vertical"
         android:inputType="none|textWebEmailAddress"
         android:text="Test123@test.com"
-        android:background="@drawable/edittextshape"
-        android:gravity="center_horizontal|center_vertical"
 
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView6"
         app:layout_constraintStart_toStartOf="@+id/et_lname"
         app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <EditText
         android:id="@+id/et_fname"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="40dp"
-        android:ems="10"
-        android:inputType="textPersonName"
         android:background="@drawable/edittextshape"
+        android:ems="10"
         android:gravity="center_horizontal|center_vertical"
+        android:inputType="textPersonName"
 
         android:text="Ellen"
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
@@ -151,14 +152,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"
-        android:textSize="34sp"
         android:textColor="#FFFFFF"
+        android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.060000002" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
@@ -178,13 +178,13 @@
 
     <EditText
         android:id="@+id/et_uname"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="40dp"
+        android:background="@drawable/edittextshape"
         android:ems="10"
+        android:gravity="center_horizontal|center_vertical"
         android:inputType="textPersonName"
         android:text="Ke912"
-        android:background="@drawable/edittextshape"
-        android:gravity="center_horizontal|center_vertical"
 
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -196,13 +196,15 @@
         android:id="@+id/btn_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/buttonshape"
+        android:onClick="register"
         android:text="Summit"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        android:onClick="register"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/et_repwd"
-        app:layout_constraintStart_toStartOf="@+id/textView9" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
