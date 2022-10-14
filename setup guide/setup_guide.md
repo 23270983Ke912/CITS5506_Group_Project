@@ -87,9 +87,7 @@ Setup on the Client side：
 
 - cd into CITS5506\_Group\_Project folder and checkout the prototype branch
 - Install all necessary python dependency 
-- Run setup code before using the execute the program shell file
-
-sudo hciconfig hci0 piscan
+- Run setup code before using the execute the program shell file: sudo hciconfig hci0 piscan
 
 - Run the program file
 
