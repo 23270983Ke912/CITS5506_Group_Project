@@ -60,7 +60,7 @@
 
   python3 manage.py runserver <your\_local\_ip\_address>:8000
 
-Setup on the Client side：
+##### Setup on the Client side：
 
 - Install android studio via link <https://developer.android.com/studio>
 - Clone the repository to your server computer
