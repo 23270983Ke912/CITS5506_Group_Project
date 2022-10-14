@@ -82,7 +82,7 @@ Setup on the Client side：
 ##### Setup on raspberry pi side:
 
 - Enable i2c in your raspberry pi 
-- Clone the repository to your raspberry pi
+- Clone the repository to your raspberry pi:
   git clone https://github.com/23270983Ke912/CITS5506\_Group\_Project.git
 
 - cd into CITS5506\_Group\_Project folder and checkout the prototype branch
