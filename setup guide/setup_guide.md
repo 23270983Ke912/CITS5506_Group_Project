@@ -65,13 +65,13 @@ Setup on the Client side：
 - Install android studio via link <https://developer.android.com/studio>
 - Clone the repository to your server computer
 
-git clone https://github.com/23270983Ke912/CITS5506\_Group\_Project.git
+  git clone https://github.com/23270983Ke912/CITS5506\_Group\_Project.git
 
 - cd into CITS5506\_Group\_Project folder and checkout the Android-APP branch
 
-cd CITS5506\_Group\_Project
+  cd CITS5506\_Group\_Project
 
-git checkout Android-APP
+  git checkout Android-APP
 
 - Use android studio to open the project folder called Blindstick
 - Build and compile
@@ -83,8 +83,7 @@ git checkout Android-APP
 
 - Enable i2c in your raspberry pi 
 - Clone the repository to your raspberry pi
-
-git clone https://github.com/23270983Ke912/CITS5506\_Group\_Project.git
+  git clone https://github.com/23270983Ke912/CITS5506\_Group\_Project.git
 
 - cd into CITS5506\_Group\_Project folder and checkout the prototype branch
 - Install all necessary python dependency 
