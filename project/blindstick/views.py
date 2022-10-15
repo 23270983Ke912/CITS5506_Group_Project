@@ -13,11 +13,13 @@ from django.utils.decorators import method_decorator  #类装饰方法
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 
-
+# index page view
 class indexView(TemplateView):
     template_name = 'blindstick/index.html'
 
+
 """
+API for Mobile app login
 post data type:
 {
     "username":"Kecheng",
@@ -56,13 +58,14 @@ class UserView(View):
             raise e
 
 
-
+# Register
 class RegisterUser(CreateView):
     form_class = RegisterForm
     success_url = reverse_lazy('login')
     template_name = 'blindstick/register.html'
 
 """
+EmergencyEvent
 post data type:
     {
     "user":"user14",
@@ -93,6 +96,7 @@ class EmergencyEventListView(ListView):
         queryset = EmergencyEvent.objects.all()
         return render(request, self.template_name, context={'queryset': queryset})
 
+# Edit the status of is_processed in emergency event table
 class EmergencyEventEditView(ListView):
     model = EmergencyEvent
 

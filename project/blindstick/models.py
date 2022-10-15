@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 from django.contrib.auth.models import User
 
-
+# Mobile app user
 class UserProfile(models.Model):
 
     username = models.CharField('user', max_length=64, blank=False, default='', unique=True)
@@ -15,6 +15,7 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.username
 
+# Emergency Event
 class EmergencyEvent(models.Model):
     user = models.CharField('username', max_length=100, blank=False, null=False)
     device = models.CharField('device',  max_length=100, blank=False, null=False)
