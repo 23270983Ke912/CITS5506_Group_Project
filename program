@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
+sudo pigpiod
+sudo hciconfig hci0 piscan 
 
 for i in exec/*py; do
-	python ${i} &
+	sudo python ${i} &
 done	
 #python exec/sensor-distance.py &
 #python exec/sensor-level.py 
