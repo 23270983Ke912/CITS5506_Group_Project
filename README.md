@@ -19,7 +19,7 @@ IoT Group Project for group 11
 
 - Login into postgres session: sudo -u postgres psql
 - Create database: CREATE DATABASE blindstick；
-- Create user with password: CREATE USER user1 WITH PASSWORD<123456>；
+- Create user with password: CREATE USER user1 WITH PASSWORD '123456'；
 - Give access to the user: GRANT ALL PRIVILEGES ON DATABASE blindstick TO user1；
 - Exit postgres session: \q
 
