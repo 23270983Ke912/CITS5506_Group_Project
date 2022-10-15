@@ -78,7 +78,7 @@ class EmergencyEventListView(ListView):
 
     @method_decorator(login_required)
     def get(self, request):
-        queryset = self.model.objects.order_by('time')
+        queryset = self.model.objects.order_by('-time')
         return render(request, self.template_name, context={'queryset': queryset})
     @csrf_exempt
     def post(self, request, *args, **kwargs):
