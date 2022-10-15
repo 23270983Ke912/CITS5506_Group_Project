@@ -119,14 +119,14 @@ if __name__ == '__main__':
         (s, b) = pi.i2c_read_i2c_block_data(h, ITG_3205_TEMP_OUT_H, 8)
 
         if s >= 0:
-            (t, x, y, z) = struct.unpack('>4h', buffer(b))
+            (t, x, y, z) = struct.unpack('>4h', buffer(b)) #Read x, y and z components from the Gyro
             t = 35 + ((t + 13200) / 280.0)
-            #print("{:.1f} {} {} {}".format(t, x, y, z))
+            #print("{:.1f} {} {} {}".format(t, x, y, z))  #Testing code for reading active xyz components
             #time.sleep(0.05)
             read += 1
-            concat = (x*x)+(y*y)+(z*z)
-            totalAcceleration = math.sqrt(concat)
-            if totalAcceleration > 5000:
+            concat = (x*x)+(y*y)+(z*z) #Basic trigonometric function of --
+            totalAcceleration = math.sqrt(concat) # --   d^2 = a^2 + b^2 + c^2 -> d = sqrt(a^2 + b^2 + c^2)
+            if totalAcceleration > 5000: # After testing combined threshold point is set to 5000
                  senddata="1"
         
         print("_______________Waiting for connection on RFCOMM channel %d" %port)
