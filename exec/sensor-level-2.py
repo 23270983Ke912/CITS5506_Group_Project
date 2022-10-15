@@ -7,22 +7,22 @@ distList = []
 def levelDif(distance_1):
     
     time.sleep(0.2)
-    print(distance_1)
-    distList.append(float(distance_1))     
-
+    
+    #check if it is a valid measure
+    if(distance_1 < 500):
+        distList.append(float(distance_1))     
+    
     if ( len(distList) > 1):
         if( len(distList) > 2 ):
              distList.pop(0)
-        #print("dist: ",distList)
+
         #calculate diff distance
         calcDist = distList[1] - distList[0] 
-        #print("dist: ",calcDist)
-        if ( calcDist > 10 ): #hole
-            #print("hole")
+
+        if ( calcDist > 4 and calcDist < 60): #hole
             distList.pop(0)
             return 1
-        elif ( calcDist < -10 ):#step
-            #print("step")
+        elif ( calcDist < -4 and calcDist > -60 ):#step
             distList.pop(0)
             return 2
 
@@ -30,16 +30,13 @@ def levelDif(distance_1):
 #end level distance#
 
 #start vibrator#
-def vibrator(qtd,vibrator,intensity):
-    GPIO.setup(vibrator, GPIO.OUT)  # Set GPIO pin X to output mode.
-    pwm = GPIO.PWM(vibrator, intensity)   # Initialize PWM on pwmPin intensity frequency
-
+def vibrator(qtd):
     dc=0                               # set dc variable to 0 for 0%
     pwm.start(dc)                      # Start PWM with 0% duty cycle
 
     while qtd > 0 :
         pwm.start(dc) 
-        pwm.ChangeDutyCycle(intensity)
+        pwm.ChangeDutyCycle(100)
         time.sleep(0.5)
         pwm.stop()
         time.sleep(0.5)
@@ -50,9 +47,12 @@ try:
     
     PIN_TRIGGER_1 = 33 #output
     PIN_ECHO_1 = 35 #input
+    PIN_PWM = 38
     
     GPIO.setup(PIN_TRIGGER_1, GPIO.OUT)
     GPIO.setup(PIN_ECHO_1, GPIO.IN)
+    GPIO.setup(PIN_PWM, GPIO.OUT)  # Set GPIO pin X to output mode.
+    pwm = GPIO.PWM(PIN_PWM, 100)   # Initialize PWM on pwmPin intensity frequency
     
     #initialize sensor
     GPIO.output(PIN_TRIGGER_1, GPIO.LOW)
@@ -76,12 +76,11 @@ try:
         
         #call the vibrator function
         if response_1 == 1:
-            #qtd,vibrator,intensity
-            #print("v 1, 3")
-            vibrator(3,40,100)
+            #qtd
+            vibrator(3)
         elif response_1 == 2:
-            #print("v 2, 2")
-            vibrator(2,40,100)
+            #qtd
+            vibrator(2)
         
 finally:
     GPIO.cleanup()
