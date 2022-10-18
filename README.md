@@ -123,30 +123,30 @@ IoT Group Project for group 11
 
 - Hardware Wire: 
 
-- ###### Distance Detection Sensor
-  - 3x 1k OHM Resistor
-  - VCC connects to Pin 2 (5V)
-  - Trig connects to Pin 7 (GPIO 4)
-  - Echo connects to R1 (1k OHM)
-  - R2 and R3 (1k OHM + 1 k OHM) connects from R1 to Ground
-  - Wire from R1 and R2+R3 connects to Pin 11 (GPIO 17)
-  - GND connects to Pin 6 (Ground)
+  - ###### Distance Detection Sensor
+    - 3x 1k OHM Resistor
+    - VCC connects to Pin 2 (5V)
+    - Trig connects to Pin 7 (GPIO 4)
+    - Echo connects to R1 (1k OHM)
+    - R2 and R3 (1k OHM + 1 k OHM) connects from R1 to Ground
+    - Wire from R1 and R2+R3 connects to Pin 11 (GPIO 17)
+    - GND connects to Pin 6 (Ground)
 
-- ###### LightSensor
-  - GND connectto GND (pin9)
-  - 3.3V connect to 3.3V (pin1)
-  - SDA connect to GPIO2 (pin3)
-  - SCL connect to GPIO3 (pin5)
-  - Relay Pin2 toRPi GPIO26 
-  - Relay VCC to RPI 5Vpin•LED positive to Relay common pin (COM)
-  - LED negative to 12V power supply negative 
-  - 12V power supply positive to Relay Normally Open (NO)
+  - ###### LightSensor
+    - GND connectto GND (pin9)
+    - 3.3V connect to 3.3V (pin1)
+    - SDA connect to GPIO2 (pin3)
+    - SCL connect to GPIO3 (pin5)
+    - Relay Pin2 toRPi GPIO26 
+    - Relay VCC to RPI 5Vpin•LED positive to Relay common pin (COM)
+    - LED negative to 12V power supply negative 
+    - 12V power supply positive to Relay Normally Open (NO)
 
-- ###### Gyroscope
-  - V to 5V (Pin 2)
-  - G to GND (Pin 6)
-  - SD to GPIO 23 (Pin 16)
-  - SC to GPIO 24 (Pin 18)
+  - ###### Gyroscope
+    - V to 5V (Pin 2)
+    - G to GND (Pin 6)
+    - SD to GPIO 23 (Pin 16)
+    - SC to GPIO 24 (Pin 18)
 
 
 
