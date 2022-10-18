@@ -121,7 +121,7 @@ Useful links:
 - For enable I2C --- <https://www.raspberrypi-spy.co.uk/2014/11/enabling-the-i2c-interface-on-the-raspberry-pi>
 - Package for deriving light sensor --- <https://core-electronics.com.au/guides/raspberry-pi-pico/piicodev-ambient-light-sensor-veml6030-quickstart-guide-for-rpi-pico/>
 
-##### Hardware Setup: 
+Hardware Wire: 
 
 - ###### Distance Detection Sensor
 - 3x 1k OHM Resistor
